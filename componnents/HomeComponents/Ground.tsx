@@ -28,10 +28,10 @@ const Ground = () => {
 
   return (
     <mesh rotation-x={-Math.PI * 0.5} castShadow receiveShadow>
-      <planeGeometry args={[50, 50]} />
+      <planeGeometry args={[25, 25]} />
       <MeshReflectorMaterial
         normalMap={normal}
-        normalScale={new THREE.Vector2(2.5, 2.5)}
+        normalScale={new THREE.Vector2(1.5, 1.5)}
         roughnessMap={roughness}
         envMapIntensity={0}
         dithering={true}

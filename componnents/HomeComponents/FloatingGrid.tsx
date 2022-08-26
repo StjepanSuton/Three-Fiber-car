@@ -21,7 +21,7 @@ export const FloatingGrid = () => {
 
   return (
     <>
-      <mesh rotation-x={-Math.PI * 0.5} position={[0, 0.425, 0]}>
+      <mesh rotation-x={-Math.PI * 0.5} position={[0, 0, 0]}>
         <planeGeometry args={[50, 50]} />
         <meshBasicMaterial
           color={[1, 1, 1]}

@@ -3,7 +3,11 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 import React, { useRef } from "react";
 
-const Road = () => {
+interface IRoadProps {
+  cameraPosition: number;
+}
+
+const Road: React.FC<IRoadProps> = ({ cameraPosition }) => {
   const itemsRef = useRef<any>([]);
 
   useFrame((state, delta) => {
@@ -11,20 +15,20 @@ const Road = () => {
 
     for (let i = 0; i < itemsRef.current.length; i++) {
       let mesh = itemsRef.current[i];
-      const constant = 7; //personaly defined constant
-      let speed = 0.8; //speed of rings
+      const constant = 10; //personaly defined constant
+      let speed = cameraPosition === 3 ? 6 : 0.8; //speed of rings
       let z =
         (i - constant) * (constant / 2) +
         ((elapsed * speed) % (constant / 2)) * 2;
       let dist = Math.abs(z) / 2;
-      mesh.position.set(0, 0, -z + 10); //-z + 10 where 10 is added distance
+      mesh.position.set(0, 0, -z - 10); //-z + 10 where 10 is added distance
       mesh.scale.set(1 - dist * 0.04, 1 - dist * 0.04, 1 - dist * 0.04);
     }
   });
 
   return (
     <>
-      {Array.from(Array(20).keys()).map((v, i) => (
+      {Array.from(Array(15).keys()).map((v, i) => (
         <mesh
           castShadow
           receiveShadow
