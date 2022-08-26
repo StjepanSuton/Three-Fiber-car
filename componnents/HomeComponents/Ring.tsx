@@ -14,19 +14,19 @@ const Ring: React.FC<IRingProps> = ({ cameraPosition }) => {
     for (let i = 0; i < itemsRef.current.length; i++) {
       let mesh = itemsRef.current[i];
       const constant = 8; //personaly defined constant
-      let speed = cameraPosition === 3 ? 12 : 0.8; //speed of rings
+      let speed = cameraPosition >= 3 ? 12 : 0.8; //speed of rings
       let z =
         (i - constant) * (constant / 2) +
         ((elapsed * speed) % (constant / 2)) * 2;
-      let dist = Math.abs(z) / 2;
+      let dist = Math.abs(z) / 11;
       mesh.position.set(0, 0, -z - 10); //-z + 10 where 10 is added distance
-      mesh.scale.set(1 - dist * 0.04, 1 - dist * 0.04, 1 - dist * 0.04);
+      mesh.scale.set(1.5 - dist * 0.004, 1 - dist * 0.01, 1 - dist * 0.04);
     }
   });
 
   return (
     <>
-      {Array.from(Array(12).keys()).map((v, i) => (
+      {Array.from(Array(35).keys()).map((v, i) => (
         <mesh
           castShadow
           position={[0, 0, 0]}

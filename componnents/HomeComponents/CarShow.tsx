@@ -7,10 +7,12 @@ import { FloatingGrid } from "./FloatingGrid";
 import Info1 from "./CarShowInfo/Info1";
 import Info2 from "./CarShowInfo/Info2";
 import Info3 from "./CarShowInfo/Info3";
+import Info4 from "./CarShowInfo/Info4";
 
 const CarShow = () => {
   const [cameraPosition, setCameraPosition] = React.useState<number>(0);
-
+  const [carColor, setCarColor] = React.useState("🟣 ");
+  const [enableRotate, setEnableRotate] = React.useState(false);
   return (
     <>
       <Stats showPanel={0} />
@@ -30,10 +32,15 @@ const CarShow = () => {
         cameraPosition={cameraPosition}
         setCameraPosition={setCameraPosition}
       />
+      <Info4
+        setCarColor={setCarColor}
+        cameraPosition={cameraPosition}
+        setCameraPosition={setCameraPosition}
+      />
       <OrbitControls
         enablePan={false}
         enableZoom={false}
-        enableRotate={false}
+        enableRotate={enableRotate}
         target={[0, 0.35, 0]}
         maxPolarAngle={1.45}
       />
@@ -49,7 +56,14 @@ const CarShow = () => {
         castShadow
         shadow-bias={-0.0001}
   />*/}
-      <spotLight
+      <directionalLight
+        color={[0.4, 0.5, 1]}
+        intensity={5.5}
+        position={[-5, 5, 8]}
+        castShadow
+        shadow-bias={-0.0001}
+      />
+      {/* <spotLight
         color={[0.4, 0.5, 1]}
         intensity={3.5}
         angle={0.6}
@@ -57,8 +71,11 @@ const CarShow = () => {
         position={[-5, 5, 8]}
         castShadow
         shadow-bias={-0.0001}
-      />
+/>*/}
       <Car
+        enableRotate={enableRotate}
+        setEnableRotate={setEnableRotate}
+        carColor={carColor}
         cameraPosition={cameraPosition}
         setCameraPosition={setCameraPosition}
       />
