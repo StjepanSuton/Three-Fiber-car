@@ -26,8 +26,8 @@ const Info1: React.FC<IInfo1Props> = ({
                 fontWeight: "bold",
                 fontSize: "2rem",
                 position: "absolute",
-                top: -550,
-                right: -750,
+                top: "-45rem",
+                right: "-62rem",
                 width: 750,
               }}
             >

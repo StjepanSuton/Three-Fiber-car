@@ -1,7 +1,5 @@
-import { Html } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import React, { useRef } from "react";
-import { Color } from "three";
 
 interface IRingProps {
   cameraPosition: number;

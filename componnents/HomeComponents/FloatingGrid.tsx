@@ -1,6 +1,6 @@
 import { useFrame, useLoader } from "@react-three/fiber";
 import * as THREE from "three";
-import gridTexture from "../../public/assets/terrain/grid-texture.png";
+import gridTexture from "../../public/assets/road_template/terrain/grid-texture.png";
 import React from "react";
 
 export const FloatingGrid = () => {
@@ -21,7 +21,7 @@ export const FloatingGrid = () => {
 
   return (
     <>
-      <mesh rotation-x={-Math.PI * 0.5} position={[0, 0, 0]}>
+      <mesh rotation-x={-Math.PI * 0.5} position={[0, 0.425, 0]}>
         <planeGeometry args={[50, 50]} />
         <meshBasicMaterial
           color={[1, 1, 1]}

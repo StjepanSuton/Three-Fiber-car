@@ -19,7 +19,7 @@ const LoaderPage: React.FC<ILoadingPageProps> = ({ progress }) => {
       }}
       center
     >
-      {progress} % loaded
+      {Math.abs(progress)} % loaded
     </Html>
   );
 };

@@ -25,12 +25,12 @@ const Car: React.FC<ICarProps> = ({ cameraPosition, setCameraPosition }) => {
 
     if (cameraPosition === 1) {
       state.camera.lookAt(ref.current.position);
-      state.camera.position.lerp(vec.set(-2, 0, 3), 0.02);
+      state.camera.position.lerp(vec.set(0, 0, 3), 0.02);
       state.camera.updateProjectionMatrix();
     }
     if (cameraPosition === 2) {
       state.camera.lookAt(ref.current.position);
-      state.camera.position.lerp(vec.set(-4, -5.5, 2.5), 0.009);
+      state.camera.position.lerp(vec.set(-2, -5.5, 2.5), 0.009);
       state.camera.updateProjectionMatrix();
     }
     if (cameraPosition === 3) {
@@ -43,12 +43,12 @@ const Car: React.FC<ICarProps> = ({ cameraPosition, setCameraPosition }) => {
 
   useEffect(() => {
     gltf.scene.scale.set(0.005, 0.005, 0.005);
-    gltf.scene.position.set(-1.55, -0.035, 0);
+    gltf.scene.position.set(0, -0.035, 0);
     gltf.scene.traverse((object) => {
       if (object instanceof Mesh) {
-        object.castShadow = true;
+        object.castShadow = false;
         object.receiveShadow = true;
-        object.material.envMapIntensity = 20;
+        object.material.envMapIntensity = 5;
       }
     });
   }, [gltf]);

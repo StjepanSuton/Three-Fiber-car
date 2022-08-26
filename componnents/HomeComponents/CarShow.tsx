@@ -1,9 +1,7 @@
 import { OrbitControls, PerspectiveCamera, Stats } from "@react-three/drei";
 import React from "react";
 import Car from "./Car";
-import Ground from "./Ground";
 import Ring from "./Ring";
-import Road from "./Road";
 import Info0 from "./CarShowInfo/Info0";
 import { FloatingGrid } from "./FloatingGrid";
 import Info1 from "./CarShowInfo/Info1";
@@ -15,7 +13,7 @@ const CarShow = () => {
 
   return (
     <>
-      <Stats />
+      <Stats showPanel={0} />
       <Info0
         cameraPosition={cameraPosition}
         setCameraPosition={setCameraPosition}
@@ -40,7 +38,7 @@ const CarShow = () => {
         maxPolarAngle={1.45}
       />
       {/* @ts-ignore */}
-      <PerspectiveCamera makeDefault={true} fov={40} position={[0, 0, -35]} />
+      <PerspectiveCamera makeDefault={true} fov={25} position={[0, 0, -15]} />
       <color args={[0, 0, 0]} attach="background" />
       {/*     <spotLight
         color={[1, 0.25, 0.7]}
@@ -53,7 +51,7 @@ const CarShow = () => {
   />*/}
       <spotLight
         color={[0.4, 0.5, 1]}
-        intensity={5.5}
+        intensity={3.5}
         angle={0.6}
         penumbra={0.5}
         position={[-5, 5, 8]}
@@ -65,7 +63,7 @@ const CarShow = () => {
         setCameraPosition={setCameraPosition}
       />
       <Ring cameraPosition={cameraPosition} />
-      <Road cameraPosition={cameraPosition} />
+      {/*  <Road cameraPosition={cameraPosition} /> */}
       <FloatingGrid />
 
       {/*  <EffectComposer>
