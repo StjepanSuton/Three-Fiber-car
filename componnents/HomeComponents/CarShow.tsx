@@ -38,7 +38,7 @@ const CarShow = () => {
         maxPolarAngle={1.45}
       />
       {/* @ts-ignore */}
-      <PerspectiveCamera makeDefault={true} fov={25} position={[0, 0, -15]} />
+      <PerspectiveCamera makeDefault={true} fov={55} position={[0, 0, -15]} />
       <color args={[0, 0, 0]} attach="background" />
       {/*     <spotLight
         color={[1, 0.25, 0.7]}

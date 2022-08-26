@@ -25,11 +25,9 @@ const Info3: React.FC<IInfo3Props> = ({
               style={{
                 color: "#ced4de",
                 fontWeight: "bold",
-                fontSize: "2rem",
-                position: "absolute",
-                top: -550,
-                right: -750,
-                width: 750,
+                fontSize: "1rem",
+                position: "relative",
+                width: 550,
               }}
             >
               <motion.h1

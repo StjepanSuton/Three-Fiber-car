@@ -25,11 +25,9 @@ const Info2: React.FC<IInfo2Props> = ({
               style={{
                 color: "#ced4de",
                 fontWeight: "bold",
-                fontSize: "2rem",
-                position: "absolute",
-                top: "-45rem",
-                right: "5rem",
-                width: 750,
+                fontSize: "1rem",
+                position: "relative",
+                width: 550,
               }}
             >
               <motion.h1

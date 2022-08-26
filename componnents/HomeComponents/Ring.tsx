@@ -14,7 +14,7 @@ const Ring: React.FC<IRingProps> = ({ cameraPosition }) => {
     for (let i = 0; i < itemsRef.current.length; i++) {
       let mesh = itemsRef.current[i];
       const constant = 8; //personaly defined constant
-      let speed = cameraPosition === 3 ? 6 : 0.8; //speed of rings
+      let speed = cameraPosition === 3 ? 12 : 0.8; //speed of rings
       let z =
         (i - constant) * (constant / 2) +
         ((elapsed * speed) % (constant / 2)) * 2;
