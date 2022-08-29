@@ -1,4 +1,9 @@
-import { OrbitControls, PerspectiveCamera, Stats } from "@react-three/drei";
+import {
+  Html,
+  OrbitControls,
+  PerspectiveCamera,
+  Stats,
+} from "@react-three/drei";
 import React from "react";
 import Car from "./Car";
 import Ring from "./Ring";
@@ -8,39 +13,67 @@ import Info1 from "./CarShowInfo/Info1";
 import Info2 from "./CarShowInfo/Info2";
 import Info3 from "./CarShowInfo/Info3";
 import Info4 from "./CarShowInfo/Info4";
+import PlaygroundComponent from "./PlaygroundComponent/PlaygroundComponent";
+import { motion } from "framer-motion-3d";
 
-const CarShow = () => {
-  const [cameraPosition, setCameraPosition] = React.useState<number>(0);
+interface ICarShowProps {
+  progress: number;
+  cameraPosition: number;
+  playgroundIsActive: boolean;
+  setPlaygroundIsActive: any;
+  setCameraPosition: any;
+}
+
+const CarShow: React.FC<ICarShowProps> = ({
+  setCameraPosition,
+  cameraPosition,
+  progress,
+  playgroundIsActive,
+  setPlaygroundIsActive,
+}) => {
   const [carColor, setCarColor] = React.useState("🟣 ");
-  const [enableRotate, setEnableRotate] = React.useState(false);
+  const [enableZoom, setEnableZoom] = React.useState(false);
+  const [enableDrag, setEnableDrag] = React.useState(false);
+  const [costumSpeed, setCostumSpeed] = React.useState(1);
   return (
     <>
-      <Stats showPanel={0} />
+      <PlaygroundComponent
+        playgroundIsActive={playgroundIsActive}
+        enableZoom={enableZoom}
+        setEnableZoom={setEnableZoom}
+        enableDrag={enableDrag}
+        setEnableDrag={setEnableDrag}
+        setCarColor={setCarColor}
+        setCostumSpeed={setCostumSpeed}
+      />
       <Info0
         cameraPosition={cameraPosition}
         setCameraPosition={setCameraPosition}
       />
-      <Info1
-        cameraPosition={cameraPosition}
-        setCameraPosition={setCameraPosition}
-      />
-      <Info2
-        cameraPosition={cameraPosition}
-        setCameraPosition={setCameraPosition}
-      />
-      <Info3
-        cameraPosition={cameraPosition}
-        setCameraPosition={setCameraPosition}
-      />
-      <Info4
-        setCarColor={setCarColor}
-        cameraPosition={cameraPosition}
-        setCameraPosition={setCameraPosition}
-      />
+      <>
+        <Info1
+          cameraPosition={cameraPosition}
+          setCameraPosition={setCameraPosition}
+        />
+        <Info2
+          cameraPosition={cameraPosition}
+          setCameraPosition={setCameraPosition}
+        />
+        <Info3
+          cameraPosition={cameraPosition}
+          setCameraPosition={setCameraPosition}
+        />
+        <Info4
+          setCarColor={setCarColor}
+          cameraPosition={cameraPosition}
+          setCameraPosition={setCameraPosition}
+        />
+      </>
+
       <OrbitControls
-        enablePan={false}
-        enableZoom={false}
-        enableRotate={enableRotate}
+        enablePan={true}
+        enableZoom={enableZoom}
+        enableRotate={enableDrag}
         target={[0, 0.35, 0]}
         maxPolarAngle={1.45}
       />
@@ -72,16 +105,18 @@ const CarShow = () => {
         castShadow
         shadow-bias={-0.0001}
 />*/}
+
       <Car
-        enableRotate={enableRotate}
-        setEnableRotate={setEnableRotate}
+        setPlaygroundIsActive={setPlaygroundIsActive}
+        playgroundIsActive={playgroundIsActive}
         carColor={carColor}
+        costumSpeed={costumSpeed}
         cameraPosition={cameraPosition}
         setCameraPosition={setCameraPosition}
       />
-      <Ring cameraPosition={cameraPosition} />
+      <Ring costumSpeed={costumSpeed} cameraPosition={cameraPosition} />
       {/*  <Road cameraPosition={cameraPosition} /> */}
-      <FloatingGrid />
+      <FloatingGrid costumSpeed={costumSpeed} />
 
       {/*  <EffectComposer>
         <Bloom

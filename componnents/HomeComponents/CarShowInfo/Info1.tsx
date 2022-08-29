@@ -15,6 +15,15 @@ const Info1: React.FC<IInfo1Props> = ({
 }) => {
   const [showButton, setShowButton] = React.useState(false);
   const { width } = useWindowSize();
+
+  React.useEffect(() => {
+    if (cameraPosition !== 1) {
+      setTimeout(() => {
+        setShowButton(false);
+      }, 1500);
+    }
+  }, [cameraPosition]);
+
   return (
     <>
       <Html as="div">

@@ -2,8 +2,11 @@ import { useFrame, useLoader } from "@react-three/fiber";
 import * as THREE from "three";
 import gridTexture from "../../public/assets/road_template/terrain/grid-texture.png";
 import React from "react";
+interface IFloatingGridProps {
+  costumSpeed: number;
+}
 
-export const FloatingGrid = () => {
+export const FloatingGrid: React.FC<IFloatingGridProps> = ({ costumSpeed }) => {
   const diffuse = useLoader(THREE.TextureLoader, gridTexture.src);
 
   React.useEffect(() => {
@@ -15,7 +18,7 @@ export const FloatingGrid = () => {
   }, [diffuse]);
 
   useFrame((state, delta) => {
-    let t = -state.clock.getElapsedTime() * 4;
+    let t = -state.clock.getElapsedTime() * (costumSpeed * 0.5);
     diffuse.offset.set(0, t);
   });
 

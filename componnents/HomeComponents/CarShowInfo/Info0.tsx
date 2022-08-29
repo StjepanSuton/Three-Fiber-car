@@ -15,7 +15,13 @@ const Info0: React.FC<IInfo0Props> = ({
 }) => {
   const [showButton, setShowButton] = React.useState(false);
   const { width } = useWindowSize();
-  console.log(width);
+  React.useEffect(() => {
+    if (cameraPosition !== 0) {
+      setTimeout(() => {
+        setShowButton(false);
+      }, 1500);
+    }
+  }, [cameraPosition]);
   return (
     <>
       <Html as="div">
@@ -23,7 +29,7 @@ const Info0: React.FC<IInfo0Props> = ({
           {cameraPosition === 0 && (
             <motion.div
               exit={{ opacity: 0 }}
-              transition={{ duration: 2 }}
+              transition={{ duration: 1.5 }}
               style={{
                 color: "#ced4de",
                 fontWeight: "bold",
@@ -57,7 +63,7 @@ const Info0: React.FC<IInfo0Props> = ({
                     border: "none",
                   }}
                 >
-                  {"See More >>>"}
+                  {"Begin tour >>>"}
                 </motion.button>
               )}
             </motion.div>

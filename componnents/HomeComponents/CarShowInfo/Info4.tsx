@@ -19,11 +19,19 @@ const Info4: React.FC<IInfo3Props> = ({
   const [showButton, setShowButton] = React.useState(false);
   const { width } = useWindowSize();
 
+  React.useEffect(() => {
+    if (cameraPosition !== 4) {
+      setTimeout(() => {
+        setShowButton(false);
+      }, 1500);
+    }
+  }, [cameraPosition]);
+
   return (
     <>
       <Html as="div">
         <AnimatePresence>
-          {cameraPosition >= 4 && (
+          {cameraPosition === 4 && (
             <motion.div
               exit={{ opacity: 0 }}
               transition={{ duration: 2 }}
@@ -52,7 +60,7 @@ const Info4: React.FC<IInfo3Props> = ({
                     key={color}
                     animate={{ opacity: 1 }}
                     initial={{ opacity: 0 }}
-                    transition={{ duration: 2, delay: 2.5 }}
+                    transition={{ duration: 1, delay: 2.5 }}
                     onClick={() => setCarColor(color)}
                     style={{
                       cursor: "pointer",
@@ -69,11 +77,11 @@ const Info4: React.FC<IInfo3Props> = ({
                 );
               })}
               {showButton && (
-                <motion.button
-                  onClick={() => setCameraPosition(cameraPosition + 1)}
-                  animate={{ opacity: 1 }}
+                <motion.h1
+                  onClick={() => setCameraPosition(-90)}
+                  animate={{ opacity: [0.2, 1, 0.2] }}
                   initial={{ opacity: 0 }}
-                  transition={{ duration: 2 }}
+                  transition={{ repeat: Infinity, duration: 2 }}
                   style={{
                     cursor: "pointer",
                     fontFamily: "Audiowide",
@@ -84,8 +92,8 @@ const Info4: React.FC<IInfo3Props> = ({
                     border: "none",
                   }}
                 >
-                  Drag your curssor
-                </motion.button>
+                  Go to playground
+                </motion.h1>
               )}
             </motion.div>
           )}

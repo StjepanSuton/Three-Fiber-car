@@ -17,6 +17,14 @@ const Info3: React.FC<IInfo3Props> = ({
   const [showButton, setShowButton] = React.useState(false);
   const { width } = useWindowSize();
 
+  React.useEffect(() => {
+    if (cameraPosition !== 3) {
+      setTimeout(() => {
+        setShowButton(false);
+      }, 1500);
+    }
+  }, [cameraPosition]);
+
   return (
     <>
       <Html as="div">

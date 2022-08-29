@@ -3,58 +3,61 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import React, { useEffect } from "react";
 import { Mesh } from "three";
 import * as THREE from "three";
+import PlaygroundComponent from "./PlaygroundComponent/PlaygroundComponent";
 
 interface ICarProps {
   setCameraPosition: any;
   cameraPosition: number;
   carColor: string;
-  enableRotate: boolean;
-  setEnableRotate: any;
+  costumSpeed: number;
+  playgroundIsActive: boolean;
+  setPlaygroundIsActive: any;
 }
 
 const Car: React.FC<ICarProps> = ({
   cameraPosition,
   setCameraPosition,
   carColor,
-  enableRotate,
-  setEnableRotate,
+  costumSpeed,
+  setPlaygroundIsActive,
 }) => {
   const gltf = useLoader(GLTFLoader, "assets/ferrari_488_challenge/scene.gltf");
-  const [camerisLocking, setCameraIsLocking] = React.useState(true);
-  //console.log(gltf.scene.children[0].children[0].children[0]);
 
   const ref = React.useRef<any>();
   const vec = new THREE.Vector3();
   useFrame((state) => {
     if (cameraPosition === 0) {
       state.camera.lookAt(ref.current.position);
-      state.camera.position.lerp(vec.set(3, 2, 10), 0.012);
+      state.camera.position.lerp(vec.set(3, 2, 10), 0.008);
       state.camera.updateProjectionMatrix();
     }
 
     if (cameraPosition === 1) {
       state.camera.lookAt(ref.current.position);
-      state.camera.position.lerp(vec.set(0, 0, -10), 0.012);
+      state.camera.position.lerp(vec.set(0, 0, -10), 0.008);
       state.camera.updateProjectionMatrix();
     }
     if (cameraPosition === 2) {
       state.camera.lookAt(ref.current.position);
-      state.camera.position.lerp(vec.set(-2, -5.5, 2.5), 0.012);
+      state.camera.position.lerp(vec.set(-2, -5.5, 2.5), 0.008);
       state.camera.updateProjectionMatrix();
     }
     if (cameraPosition === 3) {
       state.camera.lookAt(ref.current.position);
-      state.camera.position.lerp(vec.set(-4, 3, 8.5), 0.012);
+      state.camera.position.lerp(vec.set(-4, 3, 8.5), 0.008);
       state.camera.updateProjectionMatrix();
     }
     if (cameraPosition === 4) {
-      state.camera.position.lerp(vec.set(-14, 2.55, 2.5), 0.012);
-      setTimeout(() => {
-        setCameraPosition(5);
-      }, 2000);
+      state.camera.position.lerp(vec.set(-14, 2.55, 2.5), 0.008);
     }
-    if (cameraPosition === 5) {
-      setEnableRotate(true);
+    if (cameraPosition === -90) {
+      state.camera.position.lerp(vec.set(14, 5.55, 5.5), 0.008);
+      setTimeout(() => {
+        setCameraPosition(-91);
+      }, 2500);
+    }
+    if (cameraPosition === -91) {
+      setPlaygroundIsActive(true);
     }
     return null;
   });
@@ -106,7 +109,7 @@ const Car: React.FC<ICarProps> = ({
   }, [carColor]);
 
   useFrame((state, delta) => {
-    const speed = cameraPosition >= 3 ? -18 : -4;
+    const speed = cameraPosition >= 3 ? -18 : -4 * costumSpeed;
     let t = state.clock.getElapsedTime();
     gltf.scene.traverse((object) => {
       if (object instanceof Mesh) {
@@ -134,9 +137,11 @@ const Car: React.FC<ICarProps> = ({
   });
 
   return (
-    <mesh ref={ref}>
-      <primitive object={gltf.scene} />
-    </mesh>
+    <>
+      <mesh ref={ref}>
+        <primitive object={gltf.scene} />
+      </mesh>
+    </>
   );
 };
 
