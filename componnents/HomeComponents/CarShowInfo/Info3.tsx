@@ -26,6 +26,7 @@ const Info3: React.FC<IInfo3Props> = ({
                 color: "#ced4de",
                 fontWeight: "bold",
                 fontSize: "1rem",
+                right: "32rem",
                 position: "relative",
                 width: 550,
               }}

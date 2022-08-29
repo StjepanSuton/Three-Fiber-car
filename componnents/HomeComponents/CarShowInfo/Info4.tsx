@@ -20,7 +20,7 @@ const Info4: React.FC<IInfo3Props> = ({
     <>
       <Html as="div">
         <AnimatePresence>
-          {cameraPosition === 4 && (
+          {cameraPosition >= 4 && (
             <motion.div
               exit={{ opacity: 0 }}
               transition={{ duration: 2 }}
@@ -28,6 +28,8 @@ const Info4: React.FC<IInfo3Props> = ({
                 color: "#ced4de",
                 fontWeight: "bold",
                 fontSize: "1rem",
+                right: "32rem",
+                bottom: "-2rem",
                 position: "relative",
                 width: 550,
               }}
@@ -38,8 +40,7 @@ const Info4: React.FC<IInfo3Props> = ({
                 initial={{ opacity: 0 }}
                 transition={{ duration: 2, delay: 2.5 }}
               >
-                Chose from a large array of collors Drag your mouse to look
-                around and enjoy the show
+                A large array of collors
               </motion.h1>
               {["⚫️ ", "🟣 ", "⚪️ ", "🔵 ", "🟡 "].map((color) => {
                 return (
@@ -77,7 +78,7 @@ const Info4: React.FC<IInfo3Props> = ({
                     border: "none",
                   }}
                 >
-                  Click here to close
+                  Drag your curssor
                 </motion.button>
               )}
             </motion.div>

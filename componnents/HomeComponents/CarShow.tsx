@@ -11,7 +11,7 @@ import Info4 from "./CarShowInfo/Info4";
 
 const CarShow = () => {
   const [cameraPosition, setCameraPosition] = React.useState<number>(0);
-  const [carColor, setCarColor] = React.useState("🟣 ");
+  const [carColor, setCarColor] = React.useState("🔵 ");
   const [enableRotate, setEnableRotate] = React.useState(false);
   return (
     <>
@@ -45,7 +45,7 @@ const CarShow = () => {
         maxPolarAngle={1.45}
       />
       {/* @ts-ignore */}
-      <PerspectiveCamera makeDefault={true} fov={55} position={[0, 0, -15]} />
+      <PerspectiveCamera makeDefault={true} fov={35} position={[0, 0, -25]} />
       <color args={[0, 0, 0]} attach="background" />
       {/*     <spotLight
         color={[1, 0.25, 0.7]}

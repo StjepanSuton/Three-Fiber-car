@@ -19,7 +19,7 @@ const Car: React.FC<ICarProps> = ({
   enableRotate,
   setEnableRotate,
 }) => {
-  const gltf = useLoader(GLTFLoader, "assets/chevrolet_corvette_c7/scene.gltf");
+  const gltf = useLoader(GLTFLoader, "assets/ferrari_488_challenge/scene.gltf");
   const [camerisLocking, setCameraIsLocking] = React.useState(true);
   //console.log(gltf.scene.children[0].children[0].children[0]);
 
@@ -34,7 +34,7 @@ const Car: React.FC<ICarProps> = ({
 
     if (cameraPosition === 1) {
       state.camera.lookAt(ref.current.position);
-      state.camera.position.lerp(vec.set(0, 0, 3), 0.02);
+      state.camera.position.lerp(vec.set(0, 0, -10), 0.009);
       state.camera.updateProjectionMatrix();
     }
     if (cameraPosition === 2) {
@@ -48,14 +48,22 @@ const Car: React.FC<ICarProps> = ({
       state.camera.updateProjectionMatrix();
     }
     if (cameraPosition === 4) {
+      state.camera.position.lerp(vec.set(-14, 2.55, 2.5), 0.009);
+      setTimeout(() => {
+        setCameraPosition(5);
+      }, 2000);
+    }
+    if (cameraPosition === 5) {
       setEnableRotate(true);
     }
     return null;
   });
 
   useEffect(() => {
-    gltf.scene.scale.set(0.005, 0.005, 0.005);
+    gltf.scene.scale.set(0.75, 0.75, 0.75);
     gltf.scene.position.set(0, -0.035, 0);
+    gltf.scene.rotation.x = Math.PI;
+    gltf.scene.rotation.z = Math.PI;
 
     gltf.scene.traverse((object) => {
       if (object instanceof Mesh) {
@@ -98,15 +106,31 @@ const Car: React.FC<ICarProps> = ({
   }, [carColor]);
 
   useFrame((state, delta) => {
+    const speed = cameraPosition >= 3 ? -18 : -4;
     let t = state.clock.getElapsedTime();
-
-    const speed = cameraPosition >= 3 ? 8 : 4;
+    gltf.scene.traverse((object) => {
+      if (object instanceof Mesh) {
+        if (object.userData.name.includes("Wheel_FL")) {
+          object.rotation.x = t * speed;
+          if (
+            object.userData.name.includes("Wheel_FL.001") ||
+            object.userData.name.includes("Wheel_FL.002")
+          ) {
+            object.rotation.x = -t * speed;
+          }
+          object.updateMatrix();
+        }
+      }
+    });
+    /*
+  
     let group = gltf.scene.children[0].children[0].children[0];
     group.children[0].rotation.x = t * speed;
     group.children[0].rotation.x = t * speed;
     group.children[2].rotation.x = t * speed;
     group.children[4].rotation.x = t * speed;
-    group.children[6].rotation.x = t * speed;
+    group.children[6].rotation.x = t * speed; 
+    */
   });
 
   return (
