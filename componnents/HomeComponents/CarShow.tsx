@@ -11,7 +11,7 @@ import Info4 from "./CarShowInfo/Info4";
 
 const CarShow = () => {
   const [cameraPosition, setCameraPosition] = React.useState<number>(0);
-  const [carColor, setCarColor] = React.useState("🔵 ");
+  const [carColor, setCarColor] = React.useState("🟣 ");
   const [enableRotate, setEnableRotate] = React.useState(false);
   return (
     <>

@@ -28,27 +28,27 @@ const Car: React.FC<ICarProps> = ({
   useFrame((state) => {
     if (cameraPosition === 0) {
       state.camera.lookAt(ref.current.position);
-      state.camera.position.lerp(vec.set(3, 2, 10), 0.009);
+      state.camera.position.lerp(vec.set(3, 2, 10), 0.012);
       state.camera.updateProjectionMatrix();
     }
 
     if (cameraPosition === 1) {
       state.camera.lookAt(ref.current.position);
-      state.camera.position.lerp(vec.set(0, 0, -10), 0.009);
+      state.camera.position.lerp(vec.set(0, 0, -10), 0.012);
       state.camera.updateProjectionMatrix();
     }
     if (cameraPosition === 2) {
       state.camera.lookAt(ref.current.position);
-      state.camera.position.lerp(vec.set(-2, -5.5, 2.5), 0.009);
+      state.camera.position.lerp(vec.set(-2, -5.5, 2.5), 0.012);
       state.camera.updateProjectionMatrix();
     }
     if (cameraPosition === 3) {
       state.camera.lookAt(ref.current.position);
-      state.camera.position.lerp(vec.set(-4, 3, 5.5), 0.009);
+      state.camera.position.lerp(vec.set(-4, 3, 8.5), 0.012);
       state.camera.updateProjectionMatrix();
     }
     if (cameraPosition === 4) {
-      state.camera.position.lerp(vec.set(-14, 2.55, 2.5), 0.009);
+      state.camera.position.lerp(vec.set(-14, 2.55, 2.5), 0.012);
       setTimeout(() => {
         setCameraPosition(5);
       }, 2000);

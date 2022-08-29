@@ -2,6 +2,7 @@ import { Html } from "@react-three/drei";
 
 import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import useWindowSize from "../../../hooks/useWindowSize";
 
 interface IInfo1Props {
   cameraPosition: number;
@@ -13,6 +14,7 @@ const Info1: React.FC<IInfo1Props> = ({
   setCameraPosition,
 }) => {
   const [showButton, setShowButton] = React.useState(false);
+  const { width } = useWindowSize();
   return (
     <>
       <Html as="div">
@@ -24,9 +26,11 @@ const Info1: React.FC<IInfo1Props> = ({
               style={{
                 color: "#ced4de",
                 fontWeight: "bold",
-                fontSize: "1rem",
+                fontSize: width && width <= 700 ? "0.5rem" : "1rem",
                 position: "relative",
-                width: 550,
+                bottom: width && width <= 700 ? -70 : "unset",
+                left: width && width <= 700 ? -100 : "unset",
+                width: width && width <= 700 ? 250 : 550,
               }}
             >
               <motion.h1
@@ -46,7 +50,7 @@ const Info1: React.FC<IInfo1Props> = ({
                   style={{
                     cursor: "pointer",
                     fontFamily: "Audiowide",
-                    fontSize: "1.5rem",
+                    fontSize: width && width <= 700 ? "1rem" : "1.5rem",
                     backgroundColor: "unset",
                     color: "#ced4de",
                     border: "none",

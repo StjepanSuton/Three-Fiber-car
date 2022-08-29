@@ -7,6 +7,7 @@ import { useProgress } from "@react-three/drei";
 
 const Home: NextPage = () => {
   const { progress } = useProgress();
+
   return (
     <Canvas shadows dpr={2}>
       <Suspense fallback={<LoaderPage progress={progress} />}>
