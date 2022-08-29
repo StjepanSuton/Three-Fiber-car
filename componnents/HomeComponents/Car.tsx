@@ -29,6 +29,7 @@ const Car: React.FC<ICarProps> = ({
     if (cameraPosition === 0) {
       state.camera.lookAt(ref.current.position);
       state.camera.position.lerp(vec.set(3, 2, 10), 0.008);
+      setPlaygroundIsActive(false);
       state.camera.updateProjectionMatrix();
     }
 

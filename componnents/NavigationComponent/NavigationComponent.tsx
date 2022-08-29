@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import useWindowSize from "../../hooks/useWindowSize";
 
 interface INavigationComponent {
   setCameraPosition: any;
@@ -10,6 +11,8 @@ const NavigationComponent: React.FC<INavigationComponent> = ({
   setCameraPosition,
   setPlaygroundIsActive,
 }) => {
+  const { width } = useWindowSize();
+
   return (
     <nav
       style={{
@@ -23,14 +26,14 @@ const NavigationComponent: React.FC<INavigationComponent> = ({
         display: "flex",
         alignItems: "center",
         justifyContent: "space-around",
-
+        fontSize: width && width <= 700 ? "0.5rem" : "1.25rem",
         color: "white",
       }}
     >
       <h2
         onClick={() => {
-          setCameraPosition(0);
           setPlaygroundIsActive(false);
+          setCameraPosition(0);
         }}
         style={{ cursor: "pointer", fontWeight: 700 }}
       >

@@ -23,13 +23,13 @@ const PlaygroundComponent: React.FC<IPlaygroundComponent> = ({
   setCostumSpeed,
 }) => {
   const { width } = useWindowSize();
-
+  const [IsDraggable, setIsDragable] = React.useState(false);
   React.useEffect(() => {
     if (!playgroundIsActive) {
       setCostumSpeed(1);
     }
   }, [playgroundIsActive]);
-
+  console.log(playgroundIsActive);
   return (
     <Html
       style={{
@@ -42,7 +42,7 @@ const PlaygroundComponent: React.FC<IPlaygroundComponent> = ({
       <AnimatePresence>
         {playgroundIsActive && (
           <motion.div
-            drag
+            drag={IsDraggable}
             animate={{ opacity: 1 }}
             initial={{ opacity: 0 }}
             exit={{ opacity: 0 }}
@@ -52,16 +52,16 @@ const PlaygroundComponent: React.FC<IPlaygroundComponent> = ({
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-around",
-              top: -300,
-              left: -550,
-              height: 200,
+              top: width && width ? -300 : -300,
+              left: width && width ? -100 : -550,
+              height: width && width ? 120 : 200,
               color: "white",
               backgroundColor: "rgba(255, 255, 255, 0.14)",
               backdropFilter: "blur(5.5485px)",
-              padding: "1rem",
+              padding: width && width ? "0.5rem" : "1rem",
+              fontSize: width && width ? 12 : 36,
             }}
           >
-            Playground options
             <div>
               <label>Enable camera zoom</label>
               <input
