@@ -14,7 +14,7 @@ const Home: NextPage = () => {
   return (
     <motion.div
       style={{ backgroundColor: "black" }}
-      animate={{ opacity: progress === 100 ? [0, 1] : 0 }}
+      animate={{ opacity: progress === 100 ? [0, 1] : 1 }}
       transition={{ duration: 2.5 }}
     >
       {progress === 100 && (
