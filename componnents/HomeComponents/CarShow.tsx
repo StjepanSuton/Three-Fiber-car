@@ -1,10 +1,15 @@
 import {
+  CameraShake,
+  Environment,
+  GizmoHelper,
+  GizmoViewcube,
+  GizmoViewport,
   Html,
   OrbitControls,
   PerspectiveCamera,
   Stats,
 } from "@react-three/drei";
-import React from "react";
+import React, { useRef } from "react";
 import Car from "./Car";
 import Ring from "./Ring";
 import Info0 from "./CarShowInfo/Info0";
@@ -14,7 +19,15 @@ import Info2 from "./CarShowInfo/Info2";
 import Info3 from "./CarShowInfo/Info3";
 import Info4 from "./CarShowInfo/Info4";
 import PlaygroundComponent from "./PlaygroundComponent/PlaygroundComponent";
-import { motion } from "framer-motion-3d";
+import {
+  EffectComposer,
+  Glitch,
+  Outline,
+  Selection,
+  SMAA,
+  SSAO,
+} from "@react-three/postprocessing";
+import * as THREE from "three";
 
 interface ICarShowProps {
   progress: number;
@@ -31,10 +44,11 @@ const CarShow: React.FC<ICarShowProps> = ({
   playgroundIsActive,
   setPlaygroundIsActive,
 }) => {
-  const [carColor, setCarColor] = React.useState("🟣 ");
+  const [carColor, setCarColor] = React.useState("⚪️ ");
   const [enableZoom, setEnableZoom] = React.useState(false);
   const [enableDrag, setEnableDrag] = React.useState(false);
   const [costumSpeed, setCostumSpeed] = React.useState(1);
+
   return (
     <>
       <PlaygroundComponent
@@ -69,7 +83,12 @@ const CarShow: React.FC<ICarShowProps> = ({
           setCameraPosition={setCameraPosition}
         />
       </>
-
+      <GizmoHelper
+        alignment="bottom-right" // widget alignment within scene
+        margin={[80, 80]} // widget margins (X, Y)
+      >
+        <GizmoViewcube />
+      </GizmoHelper>
       <OrbitControls
         enablePan={true}
         enableZoom={enableZoom}
@@ -78,7 +97,7 @@ const CarShow: React.FC<ICarShowProps> = ({
         maxPolarAngle={1.45}
       />
       {/* @ts-ignore */}
-      <PerspectiveCamera makeDefault={true} fov={35} position={[0, 0, -25]} />
+      <PerspectiveCamera makeDefault={true} fov={25} position={[0, 0, -25]} />
       <color args={[0, 0, 0]} attach="background" />
       {/*     <spotLight
         color={[1, 0.25, 0.7]}
@@ -105,19 +124,25 @@ const CarShow: React.FC<ICarShowProps> = ({
         castShadow
         shadow-bias={-0.0001}
 />*/}
+      <Selection>
+        {/* <EffectComposer multisampling={0} autoClear={false}>
+          <Outline visibleEdgeColor={0} edgeStrength={1000} />
+          <SMAA />
+</EffectComposer>*/}
 
-      <Car
-        setPlaygroundIsActive={setPlaygroundIsActive}
-        playgroundIsActive={playgroundIsActive}
-        carColor={carColor}
-        costumSpeed={costumSpeed}
-        cameraPosition={cameraPosition}
-        setCameraPosition={setCameraPosition}
-      />
-      <Ring costumSpeed={costumSpeed} cameraPosition={cameraPosition} />
-      {/*  <Road cameraPosition={cameraPosition} /> */}
-      <FloatingGrid costumSpeed={costumSpeed} />
+        <Car
+          setPlaygroundIsActive={setPlaygroundIsActive}
+          playgroundIsActive={playgroundIsActive}
+          carColor={carColor}
+          costumSpeed={costumSpeed}
+          cameraPosition={cameraPosition}
+          setCameraPosition={setCameraPosition}
+        />
 
+        <Ring costumSpeed={costumSpeed} cameraPosition={cameraPosition} />
+        {/*  <Road cameraPosition={cameraPosition} /> */}
+        <FloatingGrid costumSpeed={costumSpeed} />
+      </Selection>
       {/*  <EffectComposer>
         <Bloom
           blendFunction={BlendFunction.ADD}

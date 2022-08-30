@@ -29,7 +29,6 @@ const PlaygroundComponent: React.FC<IPlaygroundComponent> = ({
       setCostumSpeed(1);
     }
   }, [playgroundIsActive]);
-  console.log(playgroundIsActive);
   return (
     <Html
       style={{

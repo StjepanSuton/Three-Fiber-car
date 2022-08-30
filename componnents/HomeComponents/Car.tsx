@@ -4,6 +4,8 @@ import React, { useEffect } from "react";
 import { Mesh } from "three";
 import * as THREE from "three";
 import PlaygroundComponent from "./PlaygroundComponent/PlaygroundComponent";
+import { Select } from "@react-three/postprocessing";
+import { Float } from "@react-three/drei";
 
 interface ICarProps {
   setCameraPosition: any;
@@ -138,11 +140,11 @@ const Car: React.FC<ICarProps> = ({
   });
 
   return (
-    <>
+    <Select enabled>
       <mesh ref={ref}>
         <primitive object={gltf.scene} />
       </mesh>
-    </>
+    </Select>
   );
 };
 

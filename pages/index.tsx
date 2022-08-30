@@ -3,7 +3,7 @@ import { NextPage } from "next";
 import React, { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import LoaderPage from "../componnents/HomeComponents/LoaderPage";
-import { Stars, useProgress } from "@react-three/drei";
+import { Cloud, Sky, Sparkles, Stars, useProgress } from "@react-three/drei";
 import NavigationComponent from "../componnents/NavigationComponent/NavigationComponent";
 import { motion } from "framer-motion";
 
@@ -23,9 +23,17 @@ const Home: NextPage = () => {
           setCameraPosition={setCameraPosition}
         />
       )}
-      <Canvas shadows dpr={2}>
+      <Canvas shadows dpr={[1, 2]}>
         <Suspense fallback={<LoaderPage progress={progress} />}>
-          <Stars />
+          <Stars
+            radius={100}
+            depth={100}
+            count={25000}
+            factor={4}
+            saturation={0}
+            fade
+            speed={0.5}
+          />
           <CarShow
             progress={progress}
             playgroundIsActive={playgroundIsActive}

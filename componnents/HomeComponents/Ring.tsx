@@ -38,7 +38,7 @@ const Ring: React.FC<IRingProps> = ({ cameraPosition, costumSpeed }) => {
               key={i}
               ref={(el) => (itemsRef.current[i] = el)}
             >
-              <torusGeometry args={[4.85, 0.05, 2, 6]} />
+              <torusGeometry args={[4.85, 0.15, 4, 6]} />
               {/*  <Html style={{ color: "thistle" }}>{i}</Html>*/}
               <meshStandardMaterial color={[0, 0, 0]} />
             </mesh>
@@ -50,7 +50,7 @@ const Ring: React.FC<IRingProps> = ({ cameraPosition, costumSpeed }) => {
               key={i}
               ref={(el) => (itemsRef.current[i] = el)}
             >
-              <torusGeometry args={[4.85, 0.05, 2, 6]} />
+              <torusGeometry args={[4.85, 0.15, 4, 6]} />
               {/*  <Html style={{ color: "thistle" }}>{i}</Html>*/}
               <meshStandardMaterial color={[0, 0, 0]} />
             </mesh>
